@@ -70,7 +70,7 @@ conversion_dictionary = {}
 max = 0
 
 for entry in letters+numerals+miscellaneous:
-    binary = '0b' + entry[1].replace('.', '1').replace('-', '0')
+    binary = entry[1].replace('.', '1').replace('-', '0')
     conversion_dictionary[str(entry[0])] = int(binary, 2)
     length = len(entry[1])
     if length > max:
