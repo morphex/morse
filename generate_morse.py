@@ -71,13 +71,14 @@ max = 0
 
 for entry in letters+numerals+miscellaneous:
     binary = entry[1].replace('.', '1').replace('-', '0')
-    conversion_dictionary[str(entry[0])] = int(binary, 2)
     length = len(entry[1])
     if length > max:
         max = length
+    conversion_dictionary[str(entry[0])] = int(binary, 2), length, entry[0]
+
 
 print 'max length', max
-print conversion_dictionary
+#print conversion_dictionary
 
 def translate(ascii_string):
     """Translates ASCII string into binary morse."""
@@ -89,4 +90,20 @@ def translate(ascii_string):
             raise ValueError, 'Unknown ASCII sign %s for morse' % entry
     return result
 
-print translate('Hey, ho')
+def print_morse(sign_list):
+    for entry in sign_list:
+        print 'entry', entry
+        binary = list(format(entry[0], '#010b')[2:])
+        binary.reverse()
+        binary = ''.join(binary)
+        binary = binary.replace('0', '-').replace('1', '.')
+        print 'binary', binary
+        indexes = range(entry[1])
+        indexes.reverse()
+        for x in indexes:
+            print x,
+            print binary[x],
+        print
+
+result = translate('Hey, ho.')
+print_morse(result)
